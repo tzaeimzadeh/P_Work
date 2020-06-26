@@ -1,0 +1,23 @@
+import os, argparse
+#import numpy as np
+import pandas as pd
+
+parser = argparse.ArgumentParser()
+parser.add_argument('f', metavar='foldername', help='takes the name of the folder containing the files')
+parser.add_argument('n', metavar='newfile', help='takes a name for what to call the merged files')
+args = parser.parse_args()
+
+def merge_metrics_files():
+    """
+
+    :return:
+    """
+
+    for files in os.listdir(args.f):
+        with open(files) as metrics_files:
+            merged_files = pd.read_csv(metrics_files, sep=',', skiprows=1)
+            merged_files.rename(columns=files[0][0], inplace=True)
+
+    print(merged_files)
+
+
